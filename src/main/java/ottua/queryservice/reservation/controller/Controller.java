@@ -1,2 +1,4 @@
-package ottua.queryservice.reservation.controller;public class Controller {
+package ottua.queryservice.reservation.controller;
+
+public class Controller {
 }

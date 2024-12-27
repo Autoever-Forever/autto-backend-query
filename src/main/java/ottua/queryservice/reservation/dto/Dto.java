@@ -1,2 +1,4 @@
-package ottua.queryservice.reservation.dto;public class Dto {
+package ottua.queryservice.reservation.dto;
+
+public class Dto {
 }

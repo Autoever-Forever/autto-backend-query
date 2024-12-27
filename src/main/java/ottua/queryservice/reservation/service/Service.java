@@ -1,2 +1,4 @@
-package ottua.queryservice.reservation.service;public class Service {
+package ottua.queryservice.reservation.service;
+
+public class Service {
 }

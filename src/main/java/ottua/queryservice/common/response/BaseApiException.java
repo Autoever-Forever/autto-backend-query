@@ -1,2 +1,24 @@
-package ottua.queryservice.common.response;public class BaseApiException {
+package ottua.queryservice.common.response;
+
+import lombok.*;
+import org.springframework.http.ResponseEntity;
+import ottua.queryservice.common.ErrorResponseStatus;
+
+@Getter
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
+public class BaseApiException {
+    private Integer status;
+    private String message;
+
+    public static ResponseEntity<BaseApiException> toResponseEntity(ErrorResponseStatus errorResponseStatus) {
+        return ResponseEntity
+                .status(errorResponseStatus.getHttpStatus())
+                .body(BaseApiException.builder()
+                        .status(errorResponseStatus.getHttpStatus().value())
+                        .message(errorResponseStatus.getMessage())
+                        .build()
+                );
+    }
 }

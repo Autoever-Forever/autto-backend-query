@@ -1,2 +1,4 @@
-package ottua.queryservice.kafka;public class kafka {
+package ottua.queryservice.kafka;
+
+public class kafka {
 }

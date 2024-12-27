@@ -1,2 +1,4 @@
-package ottua.queryservice.product.entity;public class Entity {
+package ottua.queryservice.product.entity;
+
+public class Entity {
 }

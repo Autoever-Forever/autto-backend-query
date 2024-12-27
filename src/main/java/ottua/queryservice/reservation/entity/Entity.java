@@ -1,2 +1,4 @@
-package ottua.queryservice.reservation.entity;public class Entity {
+package ottua.queryservice.reservation.entity;
+
+public class Entity {
 }

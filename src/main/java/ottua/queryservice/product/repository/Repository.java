@@ -1,2 +1,4 @@
-package ottua.queryservice.product.repository;public class Repository {
+package ottua.queryservice.product.repository;
+
+public class Repository {
 }
