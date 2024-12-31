@@ -1,24 +1,22 @@
 package ottua.queryservice.product.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Setter
+@Getter
+@Table(name="product_info")
 public class ProductInfo {
-
     @Id
-    @GeneratedValue(generator = "uuid2")
+    @UuidGenerator
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String title;
@@ -31,17 +29,17 @@ public class ProductInfo {
 
     private Byte ageLimit;
 
-    private Date ticketingOpenDate;
+    private LocalDateTime ticketingOpenDate;
 
-    private Date ticketingCloseDate;
+    private LocalDateTime ticketingCloseDate;
 
-    private Date performStartDate;
+    private LocalDateTime performStartDate;
 
-    private Date performEndDate;
+    private LocalDateTime performEndDate;
 
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
-    private Date lastUpdate;
+    private LocalDateTime lastUpdate;
 
     private String thumbnailUrl;
 
@@ -49,8 +47,4 @@ public class ProductInfo {
 
     @Enumerated(EnumType.STRING)
     private Status status;
-
-    public enum Status {
-        ACTIVE, INACTIVE
-    }
 }

@@ -1,28 +1,26 @@
 package ottua.queryservice.product.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Getter
+@Table(name="seat_info")
 public class SeatInfo {
-
     @Id
-    @GeneratedValue(generator = "uuid2")
+    @UuidGenerator
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
-    private UUID productId;
+    @ManyToOne
+    @JoinColumn(name="product_id", referencedColumnName="id")
+    private ProductInfo productInfo;
 
-    private Date date;
+    private LocalDateTime date;
 
     private Integer reservedSeats;
 
@@ -30,12 +28,4 @@ public class SeatInfo {
 
     @Enumerated(EnumType.STRING)
     private Status status;
-
-    @ManyToOne
-    private ProductInfo productInfo;
-
-    // Status enum 정의
-    public enum Status {
-        ACTIVE, INACTIVE
-    }
 }
