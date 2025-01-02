@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ottua.queryservice.common.response.BaseApiResponse;
 import ottua.queryservice.reservation.dto.MyReservationDto;
+import ottua.queryservice.reservation.entity.UserReservation;
 import ottua.queryservice.reservation.service.ReservationService;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @GetMapping("/reservations/{id}")
-    public BaseApiResponse<List<MyReservationDto>> fetchMyReservation (@PathVariable UUID id) {
+    public BaseApiResponse<List<MyReservationDto>> fetchMyReservation (@PathVariable("id") UUID id) {
         return new BaseApiResponse<>(HttpStatus.OK.value(),"예약 내역 조회 성공", reservationService.getReservation(id));
     }
 

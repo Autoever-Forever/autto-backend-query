@@ -31,8 +31,8 @@ public class UserReservation {
     private Status status;
 
     @Column(columnDefinition = "BINARY(16)", nullable = false)
-    private UUID product_id;
+    private UUID productId;
 
     @Column(columnDefinition = "BINARY(16)", nullable = false)
-    private UUID user_id;
+    private UUID userId;
 }
