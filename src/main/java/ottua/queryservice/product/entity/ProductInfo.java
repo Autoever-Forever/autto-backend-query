@@ -2,6 +2,7 @@ package ottua.queryservice.product.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.cglib.core.Local;
 
@@ -12,6 +13,7 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @Table(name="product_info")
 public class ProductInfo {
     @Id
