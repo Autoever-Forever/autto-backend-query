@@ -6,7 +6,8 @@ build/
 !**/src/test/**/build/
 
 ### personal setting ###
-**/src/main/resources/application.yml
+**/src/main/resources/*.yml
+
 
 ### STS ###
 .apt_generated
