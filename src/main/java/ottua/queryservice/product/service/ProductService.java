@@ -1,21 +1,42 @@
 package ottua.queryservice.product.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ottua.queryservice.product.dto.Product;
+import ottua.queryservice.product.entity.ProductInfo;
 import ottua.queryservice.product.dto.ProductDetailDto;
 import ottua.queryservice.product.dto.ProductInventoryDto;
 import ottua.queryservice.product.entity.SeatInfo;
 import ottua.queryservice.product.entity.Status;
 import ottua.queryservice.product.repository.ProductRepository;
 import ottua.queryservice.product.repository.SeatRepository;
+import java.util.UUID;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-
 @Service
 public class ProductService {
     ProductRepository productRepository;
     SeatRepository seatRepository;
+  
+    public List<Product> QueryProduct (Integer pageNum) {
+        PageRequest pageRequest = PageRequest.of(0, 10);
+        Page<ProductInfo> productInfos = productRepository.findByStatus(Status.ACTIVE, pageRequest);
+
+
+        List<Product> products = new ArrayList<>();
+        for (ProductInfo productInfo: productInfos) {
+            Product product = new Product(
+                    productInfo.getId().toString(),
+                    productInfo.getTitle(),
+                    productInfo.getPosterUrl()
+            );
+            products.add(product);
+        }
+        return products;
+    }
 
     public ProductService(ProductRepository productRepository, SeatRepository seatRepository) {
         this.productRepository = productRepository;
