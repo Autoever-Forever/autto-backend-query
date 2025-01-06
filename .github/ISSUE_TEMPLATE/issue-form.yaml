@@ -3,6 +3,16 @@ description: 'Repo에 이슈를 생성하며, 생성된 이슈는 Jira와 연동
 labels: [feat]
 title: '이슈 이름을 작성해주세요'
 body:
+  - type: dropdown
+    id: issueType
+    attributes:
+      label: '🛠️ 이슈 유형'
+      descriptions: 'Task 또는 Sub-task 중 하나를 선택하세요.'
+      options:
+        - Task
+        - Sub-task
+    validations:
+      required: true
   - type: input
     id: parentKey
     attributes:
