@@ -10,7 +10,7 @@ body:
       description: 'Task 또는 Sub-task 중 하나를 선택하세요.'
       options:
         - Task
-        - Sub-task
+        - Subtask
     validations:
       required: true
       
