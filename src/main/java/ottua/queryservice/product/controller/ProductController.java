@@ -1,13 +1,13 @@
 package ottua.queryservice.product.controller;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.ls.LSInput;
 import ottua.queryservice.product.dto.Product;
+import ottua.queryservice.product.entity.ProductInfo;
 import ottua.queryservice.product.service.ProductService;
 
 import java.util.List;
@@ -25,9 +25,8 @@ public class ProductController {
     // controller
     // 상품 전체 조회
     @GetMapping("/")
-    public ResponseEntity<Product> QueryProduct (Integer pageNum) {
+    public ResponseEntity QueryProduct (@RequestParam Integer pageNum) {
         List<Product> result = productService.QueryProduct(pageNum);
         return new ResponseEntity(result, HttpStatus.OK);
-
     }
 }

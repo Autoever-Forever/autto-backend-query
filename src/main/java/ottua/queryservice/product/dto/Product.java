@@ -2,22 +2,23 @@ package ottua.queryservice.product.dto;
 
 // dto
 // 상품 전체 조회
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
+import lombok.Getter;
 import ottua.queryservice.product.entity.Status;
 
 import java.util.UUID;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
 public class Product {
 
-    private UUID id;
+    private String id;
     private String title;
     private String posterUrl;
-    private Status status;
 
-    public Product(UUID id, String title, String posterUrl, Status status) {
+    public Product(String id, String title, String posterUrl) {
         this.id = id;
         this.title = title;
         this.posterUrl = posterUrl;
-        this.status = status;
-
     }
 }
