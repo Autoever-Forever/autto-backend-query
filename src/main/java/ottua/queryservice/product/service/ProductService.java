@@ -3,8 +3,8 @@ package ottua.queryservice.product.service;
 import org.springframework.stereotype.Service;
 import ottua.queryservice.product.dto.ProductDetailDto;
 import ottua.queryservice.product.dto.ProductInventoryDto;
-import ottua.queryservice.product.entity.ProductInfo;
 import ottua.queryservice.product.entity.SeatInfo;
+import ottua.queryservice.product.entity.Status;
 import ottua.queryservice.product.repository.ProductRepository;
 import ottua.queryservice.product.repository.SeatRepository;
 
@@ -21,47 +21,34 @@ public class ProductService {
         this.productRepository = productRepository;
         this.seatRepository = seatRepository;
     }
-    // uuid 변환 함수
-    public static UUID convertToUUID(String hexUUID) {
-        // "0x" 접두사 제거
-        String hex = hexUUID.replace("0x", "");
-
-        // MySQL BINARY(16)에서 표준 UUID 형식으로 변환
-        StringBuilder sb = new StringBuilder(hex);
-        sb.insert(8, '-');
-        sb.insert(13, '-');
-        sb.insert(18, '-');
-        sb.insert(23, '-');
-
-        System.out.println(sb);
-        return UUID.fromString(sb.toString());
-    }
 
     // 상품 상제 정보
-    public List<ProductDetailDto> QueryProductDetail(String id) {
+    public ProductDetailDto QueryProductDetail(String id) {
+        UUID uuid = UUID.fromString(id);
 
-        UUID uuid = convertToUUID(id);
-
-        List<ProductDetailDto> productDetailDto = productRepository.findDetailProduct(uuid);
-        return productDetailDto;
+        ProductDetailDto productDetailDto = productRepository.findDetailProduct(uuid);
+        // 유효성 검사 - 안 쓸 듯?
+        if (productDetailDto.getStatus() == Status.ACTIVE) {
+            return productDetailDto;
+        }
+        else {return null;}
     }
 
-
     // 날짜 및 재고 정보
-    public List<ProductInventoryDto> QueryProductInventory(String id) {
-        UUID uuid = convertToUUID(id);
+    public List<ProductInventoryDto>QueryProductInventory(String id) {
+        UUID uuid = UUID.fromString(id);
+
         List<SeatInfo> seatInfo = seatRepository.findSeatInfosByProductInfoId(uuid);
         List<ProductInventoryDto> productInventories = new ArrayList<>();
 
         // status 로 예약 가능 여부 확인
-        for (SeatInfo seat : seatInfo) {
-            if (seat.getStatus().equals("active")) {
-                ProductInventoryDto productInventoryDto = new ProductInventoryDto(
-                        seat.getDate(),
-                        seat.getTotalSeats() - seat.getReservedSeats()
-                );
-                productInventories.add(productInventoryDto);
-            }
+        // 예약이 불가능하더라도 데이터는 보여주는 것이 맞는듯
+        for (SeatInfo seat: seatInfo) {
+            System.out.println(seat.getId());
+            ProductInventoryDto inventory = new ProductInventoryDto(seat.getDate(),
+                    seat.getTotalSeats() - seat.getReservedSeats());
+
+            productInventories.add(inventory);
         }
         return productInventories;
     }

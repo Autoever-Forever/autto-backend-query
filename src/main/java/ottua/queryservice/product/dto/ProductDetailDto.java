@@ -1,12 +1,16 @@
 package ottua.queryservice.product.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.querydsl.core.annotations.QueryProjection;
+import lombok.Getter;
 import ottua.queryservice.product.entity.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
 public class ProductDetailDto {
 
     private UUID id;
@@ -21,14 +25,14 @@ public class ProductDetailDto {
 
     @QueryProjection
     public ProductDetailDto(ProductInfo productInfo, BigDecimal price) {
-        id = productInfo.getId();
-        title = productInfo.getTitle();
-        location = productInfo.getLocation();
-        performStartDate = productInfo.getPerformStartDate();
-        performEndDate = productInfo.getPerformEndDate();
-        runningTime = productInfo.getRunningTime();
-        price = price;
-        posterUrl = productInfo.getPosterUrl();
-        status = productInfo.getStatus();
+        this.id = productInfo.getId();
+        this.title = productInfo.getTitle();
+        this.location = productInfo.getLocation();
+        this.performStartDate = productInfo.getPerformStartDate();
+        this.performEndDate = productInfo.getPerformEndDate();
+        this.runningTime = productInfo.getRunningTime();
+        this.price = price;
+        this.posterUrl = productInfo.getPosterUrl();
+        this.status = productInfo.getStatus();
     }
 }
