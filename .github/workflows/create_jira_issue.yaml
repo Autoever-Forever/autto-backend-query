@@ -48,7 +48,8 @@ jobs:
       uses: atlassian/gajira-create@v3
       with:
         project: AF
-        issuetype: '${{ steps.issue-parser.outputs.issueparser_issueType }}'
+        issuetype: Subtask
+        ## issuetype: '${{ steps.issue-parser.outputs.issueparser_issueType }}'
         summary: '${{ github.event.issue.title }}'
         description: '${{ steps.md2jira.outputs.output-text }}'
         fields: |
