@@ -7,10 +7,10 @@ body:
     id: issueType
     attributes:
       label: '🛠️ 이슈 유형'
-      description: 'Task 또는 Subtask 중 하나를 선택하세요.'
+      description: 'Task 또는 하위 작업 중 하나를 선택하세요.'
       options:
         - Task
-        - Subtask
+        - 하위 작업
     validations:
       required: true
       
