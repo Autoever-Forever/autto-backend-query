@@ -1,29 +1,26 @@
 package ottua.queryservice.reservation.dto;
 
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.Data;
+import ottua.queryservice.product.dto.ReservedProductDto;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 public class MyReservationDto {
-    private UUID reservationId;
-    private UUID productId;
+    private String reservationId;
+    private String seatId;
     private LocalDateTime createdDate;
-    private LocalDateTime updatedDate;
     private LocalDateTime ticketDate;
     private String status;
     private String title;
 
-    public MyReservationDto(ReservationDto reservation, String title) {
+    public MyReservationDto(ReservationDto reservation, ReservedProductDto reservedProduct) {
         this.reservationId = reservation.getReservationId();
-        this.productId = reservation.getProductId();
+        this.seatId = reservation.getSeatId();
         this.createdDate = reservation.getCreatedDate();
-        this.updatedDate = reservation.getUpdatedDate();
-        this.ticketDate = reservation.getUpdatedDate();
         this.status = reservation.getStatus();
-        this.title = title;
+        this.ticketDate = reservedProduct.getTicketDate();
+        this.title = reservedProduct.getTitle();
     }
 }
 

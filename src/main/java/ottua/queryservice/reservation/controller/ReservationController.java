@@ -11,7 +11,6 @@ import ottua.queryservice.reservation.dto.MyReservationDto;
 import ottua.queryservice.reservation.service.ReservationService;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +18,7 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @GetMapping("/mypage/reservation/{id}")
-    public BaseApiResponse<List<MyReservationDto>> getMyReservationList(@PathVariable UUID id) {
+    public BaseApiResponse<List<MyReservationDto>> getMyReservationList(@PathVariable String id) {
         return new BaseApiResponse<>(HttpStatus.OK.value(), "예약 내역 조회 성공", reservationService.requestReservationList(id));
     }
 }
