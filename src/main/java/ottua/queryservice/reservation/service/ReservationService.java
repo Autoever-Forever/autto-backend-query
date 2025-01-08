@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ottua.queryservice.config.CustomConfig;
 import ottua.queryservice.product.dto.ReservedProductDto;
 import ottua.queryservice.product.repository.SeatRepository;
 import ottua.queryservice.reservation.dto.MyReservationDto;
@@ -19,13 +20,15 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
+    private final CustomConfig customConfig;
     private final RestTemplate restTemplate;
     private final SeatRepository seatRepository;
 
     public List<MyReservationDto> requestReservationList(String user_id) {
+
         URI uri = UriComponentsBuilder
-                .fromUriString("http://localhost:9090/api/v1/reservation")
-                .path("/list/{id}")
+                .fromUriString(customConfig.getReservationUrl())
+                .path("/list/{user_id}")
                 .encode()
                 .build()
                 .expand(user_id)
