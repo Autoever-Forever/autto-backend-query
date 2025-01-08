@@ -9,10 +9,12 @@ import java.time.LocalDateTime;
 public class ReservedProductDto {
     private String title;
     private LocalDateTime ticketDate;
+    private String thumbnailUrl;
 
     @QueryProjection
-    public ReservedProductDto(LocalDateTime ticketDate, String title) {
+    public ReservedProductDto(LocalDateTime ticketDate, String title, String thumbnailUrl) {
         this.title = title;
         this.ticketDate = ticketDate;
+        this.thumbnailUrl = thumbnailUrl;
     }
 }

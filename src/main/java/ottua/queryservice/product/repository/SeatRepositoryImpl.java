@@ -20,7 +20,7 @@ public class SeatRepositoryImpl implements SeatDslRepository {
     @Override
     public ReservedProductDto findSeatBySeatId(UUID seatId) {
         return queryFactory
-                .select(new QReservedProductDto(seatInfo.date, productInfo.title))
+                .select(new QReservedProductDto(seatInfo.date, productInfo.title, productInfo.thumbnailUrl))
                 .from(seatInfo)
                 .where(seatInfo.id.eq(seatId))
                 .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
