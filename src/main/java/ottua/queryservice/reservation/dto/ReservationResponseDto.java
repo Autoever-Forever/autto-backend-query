@@ -12,5 +12,6 @@ import java.util.UUID;
 public class ReservationResponseDto {
     private int status;
     private String message;
+    private String error;
     private List<ReservationDto> data;
 }
