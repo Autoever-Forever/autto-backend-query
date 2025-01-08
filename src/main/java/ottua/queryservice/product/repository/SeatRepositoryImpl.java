@@ -2,7 +2,9 @@ package ottua.queryservice.product.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import ottua.queryservice.product.dto.QReservedProductDetailDto;
 import ottua.queryservice.product.dto.QReservedProductDto;
+import ottua.queryservice.product.dto.ReservedProductDetailDto;
 import ottua.queryservice.product.dto.ReservedProductDto;
 
 import static ottua.queryservice.product.entity.QProductInfo.productInfo;
@@ -21,6 +23,16 @@ public class SeatRepositoryImpl implements SeatDslRepository {
     public ReservedProductDto findSeatBySeatId(UUID seatId) {
         return queryFactory
                 .select(new QReservedProductDto(seatInfo.date, productInfo.title, productInfo.thumbnailUrl))
+                .from(seatInfo)
+                .where(seatInfo.id.eq(seatId))
+                .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
+                .fetchOne();
+    }
+
+    @Override
+    public ReservedProductDetailDto findProductDetailBySeatId(UUID seatId) {
+        return queryFactory
+                .select(new QReservedProductDetailDto(productInfo.title, productInfo.posterUrl, productInfo.location, seatInfo.date, seatInfo.price))
                 .from(seatInfo)
                 .where(seatInfo.id.eq(seatId))
                 .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
