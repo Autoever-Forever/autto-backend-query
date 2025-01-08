@@ -13,6 +13,7 @@ public class MyReservationDto {
     private LocalDateTime ticketDate;
     private String status;
     private String title;
+    private String thumbnailUrl;
 
     public MyReservationDto(ReservationDto reservation, ReservedProductDto reservedProduct) {
         this.reservationId = reservation.getReservationId();
@@ -21,6 +22,7 @@ public class MyReservationDto {
         this.status = reservation.getStatus();
         this.ticketDate = reservedProduct.getTicketDate();
         this.title = reservedProduct.getTitle();
+        this.thumbnailUrl = reservedProduct.getThumbnailUrl();
     }
 }
 
