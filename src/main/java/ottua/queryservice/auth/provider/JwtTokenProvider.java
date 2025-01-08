@@ -1,7 +1,6 @@
 package ottua.queryservice.auth.provider;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,8 +35,8 @@ public class JwtTokenProvider {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        UserDetails userDetails = new User(claims.getSubject(),"", authorities);
-        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+        UserDetails principal = new User(claims.getSubject(),"", authorities);
+        return new UsernamePasswordAuthenticationToken(principal, "", authorities);
 
     }
 

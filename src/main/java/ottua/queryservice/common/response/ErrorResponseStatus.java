@@ -1,4 +1,4 @@
-package ottua.queryservice.common;
+package ottua.queryservice.common.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

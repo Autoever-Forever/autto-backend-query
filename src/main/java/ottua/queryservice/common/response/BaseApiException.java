@@ -2,7 +2,6 @@ package ottua.queryservice.common.response;
 
 import lombok.*;
 import org.springframework.http.ResponseEntity;
-import ottua.queryservice.common.ErrorResponseStatus;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
