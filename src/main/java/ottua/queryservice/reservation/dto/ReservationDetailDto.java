@@ -23,7 +23,7 @@ public class ReservationDetailDto {
         this.reservationId = reservationId;
         this.title = reservedProductDetailDto.getTitle();
         this.posterUrl = reservedProductDetailDto.getPosterUrl();
-        this.ticketDate = LocalDateTime.now();
+        this.ticketDate = reservedProductDetailDto.getTicketDate();
         this.location = reservedProductDetailDto.getLocation();
         this.seatCount = reservationCancelDto.getSeatCount();
 
