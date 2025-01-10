@@ -1,16 +1,25 @@
 package ottua.queryservice.common.response;
 
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public class BaseApiResponse<T> {
-    private Integer status;
-    private String message;
-    private T data;
+    private final Integer status;
+    private final String message;
+    private final T data;
 
-    public BaseApiResponse(Integer status, String message, T data) {
-        this.status = status;
+    public BaseApiResponse(HttpStatus status, String message, T data) {
+        this.status = status.value();
         this.message = message;
         this.data = data;
+    }
+
+    public static <T> BaseApiResponse<T> success(String message, T data) {
+        return new BaseApiResponse<>(HttpStatus.OK, message, data);
+    }
+
+    public static BaseApiResponse<Void> error(HttpStatus status, String message) {
+        return new BaseApiResponse<>(status, message, null);
     }
 }

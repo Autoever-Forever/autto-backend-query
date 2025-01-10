@@ -13,12 +13,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ottua.queryservice.auth.jwt.JwtAuthenticationFilter;
 import ottua.queryservice.auth.provider.JwtTokenProvider;
+import ottua.queryservice.auth.jwt.JwtAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtTokenProvider jwtTokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,6 +38,8 @@ public class SecurityConfig {
                         authorize.requestMatchers("/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .build();
