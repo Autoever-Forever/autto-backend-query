@@ -18,6 +18,7 @@ public class ReservationDetailDto {
     private String price;
     private Integer seatCount;
     private String seatsPrice;
+    private String status;
 
     public ReservationDetailDto(String reservationId, ReservationCancelDto reservationCancelDto, ReservedProductDetailDto reservedProductDetailDto) {
         this.reservationId = reservationId;
@@ -26,6 +27,7 @@ public class ReservationDetailDto {
         this.ticketDate = reservedProductDetailDto.getTicketDate();
         this.location = reservedProductDetailDto.getLocation();
         this.seatCount = reservationCancelDto.getSeatCount();
+        this.status = reservationCancelDto.getStatus();
 
         DecimalFormat priceKRWFormat  = new DecimalFormat("#,###.##");
         this.price = priceKRWFormat.format(reservedProductDetailDto.getPrice()) + "원";
