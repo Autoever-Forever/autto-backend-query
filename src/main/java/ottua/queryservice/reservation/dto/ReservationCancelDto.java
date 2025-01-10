@@ -11,4 +11,6 @@ public class ReservationCancelDto {
     private String seatId;
     @JsonProperty("seatCount")
     private int seatCount;
+    @JsonProperty("ReservationStatus")
+    private String status;
 }
