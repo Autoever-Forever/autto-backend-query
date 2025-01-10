@@ -1,8 +1,10 @@
 package ottua.queryservice.product.controller;
 
+import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ottua.queryservice.common.response.BaseApiResponse;
 import ottua.queryservice.product.dto.Product;
 import ottua.queryservice.product.dto.ProductDetailDto;
 import ottua.queryservice.product.dto.ProductInventoryDto;
@@ -14,27 +16,23 @@ import java.util.List;
 @RequestMapping("")
 public class ProductController {
     ProductService productService;
-
     public ProductController (ProductService productService){
         this.productService = productService;
     }
-    // 상품 전체 조회
+
     @GetMapping("/")
-    public ResponseEntity<List<Product>> QueryProduct (@RequestParam Integer pageNum) {
-        List<Product> result = productService.QueryProduct(pageNum);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public BaseApiResponse<?> QueryProduct (@RequestParam Integer pageNum) throws IllegalArgumentException, Exception {
+        return BaseApiResponse.success("상품 전체 리스트 조회 성공", productService.QueryProduct(pageNum));
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<ProductDetailDto> QueryProductDetail (@RequestParam String id) {
-        ProductDetailDto result = productService.QueryProductDetail(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public BaseApiResponse<?> QueryProductDetail (@RequestParam String id) throws IllegalArgumentException, Exception {
+        return BaseApiResponse.success("상품 상세 정보 조회 성공",productService.QueryProductDetail(id));
     }
 
     @GetMapping("/inventory")
-    public ResponseEntity<List<ProductInventoryDto>> QueryProductInventory (@RequestParam String id) {
-        List<ProductInventoryDto> result = productService.QueryProductInventory(id);
-        return new ResponseEntity<>(result, HttpStatus.OK);
+    public BaseApiResponse<?> QueryProductInventory (@RequestParam String id) throws IllegalArgumentException, Exception{
+        return BaseApiResponse.success("상품 날짜 및 재고 조회 성공", productService.QueryProductInventory(id));
     }
 
 }

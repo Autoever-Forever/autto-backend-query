@@ -55,22 +55,10 @@ public class JwtTokenProvider {
 
     // 토큰 정보를 검증하는 메서드
     public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (SecurityException | MalformedJwtException e) {
-            throw new JwtException("Invalid JWT token");
-        } catch (ExpiredJwtException e) {
-            throw new JwtException("Expired JWT Token");
-        } catch (UnsupportedJwtException e) {
-            throw new JwtException("Unsupported JWT Token");
-        } catch (IllegalArgumentException e) {
-            throw new JwtException("JWT claims String is empty");
-        } catch (SignatureException e) {
-            throw new JwtException("Invalid JWT signature");
-        }
+        Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+        return true;
     }
 }

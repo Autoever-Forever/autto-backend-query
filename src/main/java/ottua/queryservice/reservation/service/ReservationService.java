@@ -1,11 +1,13 @@
 package ottua.queryservice.reservation.service;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.ErrorResponse;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import ottua.queryservice.common.response.CustomException;
+import ottua.queryservice.common.response.ErrorResponseStatus;
 import ottua.queryservice.config.CustomConfig;
 import ottua.queryservice.product.dto.ReservedProductDetailDto;
 import ottua.queryservice.product.dto.ReservedProductDto;
@@ -18,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -64,6 +65,10 @@ public class ReservationService {
 
         UUID seatId = UUID.fromString(response.getData().getSeatId());
         ReservedProductDetailDto reservedProductDetail = seatRepository.findProductDetailBySeatId(seatId);
+
+        if(reservedProductDetail.getTitle().isEmpty()){
+            throw new CustomException(ErrorResponseStatus.NOT_FOUND_SEAT_ID);
+        }
 
         return new ReservationDetailDto(reservation_id, response.getData(), reservedProductDetail);
     }

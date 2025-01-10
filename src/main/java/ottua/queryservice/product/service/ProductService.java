@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ottua.queryservice.common.response.CustomException;
+import ottua.queryservice.common.response.ErrorResponseStatus;
 import ottua.queryservice.product.dto.Product;
 import ottua.queryservice.product.entity.ProductInfo;
 import ottua.queryservice.product.dto.ProductDetailDto;
@@ -43,9 +45,13 @@ public class ProductService {
         this.seatRepository = seatRepository;
     }
 
-    // 상품 상제 정보
+    // 상품 상세 정보
     public ProductDetailDto QueryProductDetail(String id) {
         UUID uuid = UUID.fromString(id);
+
+        if(!productRepository.existsById(uuid)) {
+            throw new CustomException(ErrorResponseStatus.NOT_FOUND_PRODUCT_ID);
+        }
 
         ProductDetailDto productDetailDto = productRepository.findDetailProduct(uuid);
         // 유효성 검사 - 안 쓸 듯?
