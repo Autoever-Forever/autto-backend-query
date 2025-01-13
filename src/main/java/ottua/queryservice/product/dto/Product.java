@@ -8,7 +8,8 @@ import lombok.Getter;
 import ottua.queryservice.product.entity.Status;
 
 import java.util.UUID;
-@JsonIgnoreProperties(ignoreUnknown = true)
+
+@Data
 @Getter
 public class Product {
 

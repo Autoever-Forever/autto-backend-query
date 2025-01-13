@@ -11,5 +11,4 @@ import java.util.UUID;
 
 @Repository
 public interface SeatRepository extends JpaRepository<SeatInfo, UUID>, SeatDslRepository, QuerydslPredicateExecutor<ProductInfo> {
-    List<SeatInfo> findSeatInfosByProductInfoId(UUID id);
 }
