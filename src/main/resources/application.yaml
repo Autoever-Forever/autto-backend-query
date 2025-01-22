@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:ProductDB}?serverTimezone=Asia/Seoul
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:1234}
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: update
+
+jwt:
+  secret: ${JWT_SECRET:64461f01e1af406da538b9c48d801ce59142452199ff112fb5404c8e7e98e3ff}
+  header: Authorization
+  prefix: "Bearer "
+
+custom:
+  url:
+    reservation: ${RESERVATION_URL:http://localhost:8083/api/v1/reservation}
+server:
+  port: ${SERVER_PORT:8082}
