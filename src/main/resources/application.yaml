@@ -19,5 +19,3 @@ jwt:
 custom:
   url:
     reservation: ${RESERVATION_URL:http://localhost:8083/api/v1/reservation}
-server:
-  port: ${SERVER_PORT:8082}

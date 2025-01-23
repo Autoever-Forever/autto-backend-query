@@ -14,7 +14,7 @@ ENV TZ=Asia/Seoul
 
 # .env 파일에서 전달된 환경 변수를 사용하여 Java 애플리케이션 실행
 # 예시로 SPRING_PROFILES_ACTIVE 환경 변수를 사용하는 경우
-ARG SPRING_PROFILES_ACTIVE=prod   # default로 prod 설정
+ARG SPRING_PROFILES_ACTIVE=prod
 ENV SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
 
 # 빌드 결과물인 JAR 파일을 컨테이너에 복사
@@ -22,7 +22,6 @@ COPY --from=builder /build/build/libs/*.jar app.jar
 
 # EXPOSE로 컨테이너가 사용할 포트를 열어줍니다.
 EXPOSE 8080
-EXPOSE 8084
 
 # ENTRYPOINT에서 환경 변수를 사용하여 Java 애플리케이션 실행
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=${SPRING_PROFILES_ACTIVE}", "app.jar"]
