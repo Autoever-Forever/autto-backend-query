@@ -5,8 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.autto.queryservice.common.response.CustomException;
 import com.autto.queryservice.common.response.ErrorResponseStatus;
-import com.autto.queryservice.product.dto.Product;
-import com.autto.queryservice.product.entity.ProductInfo;
+import com.autto.queryservice.product.entity.Product;
 import com.autto.queryservice.product.dto.ProductDetailDto;
 import com.autto.queryservice.product.dto.ProductInventoryDto;
 import com.autto.queryservice.product.entity.Status;
@@ -22,14 +21,14 @@ public class ProductService {
     ProductRepository productRepository;
     SeatRepository seatRepository;
   
-    public List<Product> QueryProduct (Integer pageNum) {
+    public List<com.autto.queryservice.product.dto.Product> QueryProduct (Integer pageNum) {
         PageRequest pageRequest = PageRequest.of(pageNum, 5);
-        Page<ProductInfo> productInfos = productRepository.findByStatus(Status.ACTIVE, pageRequest);
+        Page<Product> productInfos = productRepository.findByStatus(Status.ACTIVE, pageRequest);
 
 
-        List<Product> products = new ArrayList<>();
-        for (ProductInfo productInfo: productInfos) {
-            Product product = new Product(
+        List<com.autto.queryservice.product.dto.Product> products = new ArrayList<>();
+        for (Product productInfo: productInfos) {
+            com.autto.queryservice.product.dto.Product product = new com.autto.queryservice.product.dto.Product(
                     productInfo.getId().toString(),
                     productInfo.getTitle(),
                     productInfo.getPosterUrl()
