@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,3 +20,5 @@ jwt:
 custom:
   url:
     reservation: ${RESERVATION_URL:http://localhost:8083/api/v1/reservation}
+server:
+  port: ${SEVER_PORT:8080}
