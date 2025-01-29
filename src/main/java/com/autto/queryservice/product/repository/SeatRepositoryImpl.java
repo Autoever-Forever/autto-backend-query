@@ -7,8 +7,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import com.autto.queryservice.product.dto.*;
 
-import static com.autto.queryservice.product.entity.QProductInfo.productInfo;
-import static com.autto.queryservice.product.entity.QSeatInfo.seatInfo;
+import static com.autto.queryservice.product.entity.QProduct.product;
+import static com.autto.queryservice.product.entity.QSeatByDateInventory.seatByDateInventory;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,30 +23,30 @@ public class SeatRepositoryImpl implements SeatDslRepository {
     @Override
     public List<ProductInventoryDto> findSeatInfos(UUID productID) {
         return (List<ProductInventoryDto>) queryFactory
-                .select(new QProductInventoryDto(seatInfo.id, productInfo.title, productInfo.location, productInfo.performStartDate, productInfo.performEndDate, seatInfo.date, seatInfo.totalSeats.subtract(seatInfo.reservedSeats),seatInfo.price, seatInfo.status))
-                .from(seatInfo)
-                .where(seatInfo.productInfo.id.eq(productID))
-                .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
+                .select(new QProductInventoryDto(seatByDateInventory.id, product.title, product.location, product.performStartDate, product.performEndDate, seatByDateInventory.date, seatByDateInventory.totalSeats.subtract(seatByDateInventory.reservedSeats),seatByDateInventory.price, seatByDateInventory.status))
+                .from(seatByDateInventory)
+                .where(seatByDateInventory.product.id.eq(productID))
+                .leftJoin(product).on(seatByDateInventory.product.id.eq(product.id))
                 .fetch();
     }
 
     @Override
     public ReservedProductDto findSeatBySeatId(UUID seatId) {
         return queryFactory
-                .select(new QReservedProductDto(seatInfo.date, productInfo.title, productInfo.thumbnailUrl))
-                .from(seatInfo)
-                .where(seatInfo.id.eq(seatId))
-                .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
+                .select(new QReservedProductDto(seatByDateInventory.date, product.title, product.thumbnailUrl))
+                .from(seatByDateInventory)
+                .where(seatByDateInventory.id.eq(seatId))
+                .leftJoin(product).on(seatByDateInventory.product.id.eq(product.id))
                 .fetchOne();
     }
 
     @Override
     public ReservedProductDetailDto findProductDetailBySeatId(UUID seatId) {
         return queryFactory
-                .select(new QReservedProductDetailDto(productInfo.title, productInfo.posterUrl, productInfo.location, seatInfo.date, seatInfo.price))
-                .from(seatInfo)
-                .where(seatInfo.id.eq(seatId))
-                .leftJoin(productInfo).on(seatInfo.productInfo.id.eq(productInfo.id))
+                .select(new QReservedProductDetailDto(product.title, product.posterUrl, product.location, seatByDateInventory.date, seatByDateInventory.price))
+                .from(seatByDateInventory)
+                .where(seatByDateInventory.id.eq(seatId))
+                .leftJoin(product).on(seatByDateInventory.product.id.eq(product.id))
                 .fetchOne();
     }
 }

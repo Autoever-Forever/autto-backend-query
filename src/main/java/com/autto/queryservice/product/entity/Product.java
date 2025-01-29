@@ -9,8 +9,8 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Table(name="product_info")
-public class ProductInfo {
+@Table(name="product")
+public class Product {
     @Id
     @UuidGenerator
     @Column(columnDefinition = "BINARY(16)")

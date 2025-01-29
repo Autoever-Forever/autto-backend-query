@@ -8,8 +8,8 @@ import com.autto.queryservice.product.dto.QProductDetailDto;
 import java.util.UUID;
 
 
-import static com.autto.queryservice.product.entity.QProductInfo.productInfo;
-import static com.autto.queryservice.product.entity.QSeatInfo.seatInfo;
+import static com.autto.queryservice.product.entity.QProduct.product;
+import static com.autto.queryservice.product.entity.QSeatByDateInventory.seatByDateInventory;
 
 public class ProductRepositoryImpl implements ProductDslRepository {
     private final JPAQueryFactory queryFactory;
@@ -23,14 +23,14 @@ public class ProductRepositoryImpl implements ProductDslRepository {
     // product_id 값으로 seateInfo 테이블에서 price 값 가져오기
     public ProductDetailDto findDetailProduct(UUID id) {
         return queryFactory
-                .select(new QProductDetailDto(productInfo,
+                .select(new QProductDetailDto(product,
                         JPAExpressions
-                                .select(seatInfo.price.min())
-                                .from(seatInfo)
-                                .where(seatInfo.productInfo.id.eq(productInfo.id))
+                                .select(seatByDateInventory.price.min())
+                                .from(seatByDateInventory)
+                                .where(seatByDateInventory.product.id.eq(product.id))
                 ))
-                .from(productInfo)
-                .where(productInfo.id.eq(id))
+                .from(product)
+                .where(product.id.eq(id))
                 .fetchOne();
     }
 }

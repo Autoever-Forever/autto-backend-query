@@ -10,8 +10,8 @@ import java.util.UUID;
 
 @Entity
 @Getter
-@Table(name="seat_info")
-public class SeatInfo {
+@Table(name="seat_by_date_inventory")
+public class SeatByDateInventory {
     @Id
     @UuidGenerator
     @Column(columnDefinition = "BINARY(16)")
@@ -19,7 +19,7 @@ public class SeatInfo {
 
     @ManyToOne
     @JoinColumn(name="product_id", referencedColumnName="id")
-    private ProductInfo productInfo;
+    private Product product;
 
     private LocalDateTime date;
 
