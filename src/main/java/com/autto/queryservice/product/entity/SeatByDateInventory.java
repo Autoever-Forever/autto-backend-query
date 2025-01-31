@@ -1,5 +1,6 @@
 package com.autto.queryservice.product.entity;
 
+import ch.qos.logback.core.util.Loader;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.hibernate.annotations.UuidGenerator;
@@ -29,6 +30,12 @@ public class SeatByDateInventory {
 
     @Column(precision = 10, scale = 2)
     private BigDecimal price;
+
+    private String currencyCode;
+
+    private LocalDateTime createdDate;
+
+    private LocalDateTime lastUpdate;
 
     @Enumerated(EnumType.STRING)
     private Status status;
