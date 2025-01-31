@@ -24,8 +24,6 @@ public class Product {
 
     private Integer ticketingLimit;
 
-    private Byte ageLimit;
-
     private LocalDateTime ticketingOpenDate;
 
     private LocalDateTime ticketingCloseDate;
