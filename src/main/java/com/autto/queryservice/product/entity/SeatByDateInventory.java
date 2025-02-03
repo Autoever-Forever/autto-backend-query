@@ -23,18 +23,19 @@ public class SeatByDateInventory {
     private Product product;
 
     private LocalDateTime date;
-
+    @Column(name = "reserved_seats")
     private Integer reservedSeats;
-
+    @Column(name = "total_seats")
     private Integer totalSeats;
 
     @Column(precision = 10, scale = 2)
     private BigDecimal price;
 
+    @Column(name = "currency_code")
     private String currencyCode;
-
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
-
+    @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
     @Enumerated(EnumType.STRING)
