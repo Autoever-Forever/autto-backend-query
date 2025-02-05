@@ -13,7 +13,7 @@ src/integration-test/
 
 # 환경 설정 파일 (필요에 따라)
 *.properties
-*.yml
+src/main/java/resources/application-dev.yaml
 
 # IDE 설정 파일
 *.class
