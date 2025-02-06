@@ -7,7 +7,7 @@ import com.autto.queryservice.product.service.ProductService;
 
 @RestController
 @ResponseBody
-@RequestMapping("/products")
+@RequestMapping("/products/info")
 public class ProductController {
     ProductService productService;
     public ProductController (ProductService productService){
