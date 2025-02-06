@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 ### personal setting ###
-**/src/main/resources/*.yml
+**/src/main/resources/application-dev.yaml
 
 
 ### STS ###
