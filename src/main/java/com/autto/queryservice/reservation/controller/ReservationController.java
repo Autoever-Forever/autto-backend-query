@@ -18,7 +18,7 @@ import com.autto.queryservice.reservation.service.ReservationService;
 public class ReservationController {
     private final ReservationService reservationService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public BaseApiResponse<?> getMyReservationList(@AuthenticationPrincipal User user) throws IllegalArgumentException, Exception {
         String userId = UuidFormatter.replaceUuid(user.getUsername());
         return BaseApiResponse.success("예약 내역 조회 성공", reservationService.requestReservationList(userId));
