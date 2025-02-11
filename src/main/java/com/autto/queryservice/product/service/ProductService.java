@@ -21,17 +21,19 @@ public class ProductService {
     ProductRepository productRepository;
     SeatRepository seatRepository;
   
-    public List<com.autto.queryservice.product.dto.Product> QueryProduct (Integer pageNum) {
+    public List<com.autto.queryservice.product.dto.Product> QueryProduct(Integer pageNum) {
         PageRequest pageRequest = PageRequest.of(pageNum, 5);
         Page<Product> productInfos = productRepository.findByStatus(Status.ACTIVE, pageRequest);
 
-
         List<com.autto.queryservice.product.dto.Product> products = new ArrayList<>();
-        for (Product productInfo: productInfos) {
+        for (Product productInfo : productInfos) {
             com.autto.queryservice.product.dto.Product product = new com.autto.queryservice.product.dto.Product(
                     productInfo.getId().toString(),
                     productInfo.getTitle(),
-                    productInfo.getPosterUrl()
+                    productInfo.getPosterUrl(),
+                    productInfo.getLocation(),
+                    productInfo.getPerformStartDate(),
+                    productInfo.getPerformEndDate()
             );
             products.add(product);
         }
