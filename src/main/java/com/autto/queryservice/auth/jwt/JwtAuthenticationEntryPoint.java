@@ -22,6 +22,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
             throws IOException, ServletException {
         ErrorResponseStatus exception = (ErrorResponseStatus) request.getAttribute("exception");
 
+        if (exception == null) {
+            exception = ErrorResponseStatus.UNKNOWN_ERROR;
+        }
+
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.getWriter()
