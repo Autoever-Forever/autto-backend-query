@@ -31,7 +31,7 @@ public class ReservationService {
     public List<MyReservationDto> requestReservationList(String user_id) {
         URI uri = UriComponentsBuilder
                 .fromUriString(customConfig.getReservationUrl())
-                .path("api/v1/reservation/list/{user_id}")
+                .path("/list/{user_id}")
                 .encode()
                 .build()
                 .expand(user_id)
