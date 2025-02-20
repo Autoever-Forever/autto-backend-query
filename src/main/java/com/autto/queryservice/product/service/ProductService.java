@@ -22,7 +22,7 @@ public class ProductService {
     SeatRepository seatRepository;
   
     public List<com.autto.queryservice.product.dto.Product> QueryProduct(Integer pageNum) {
-        PageRequest pageRequest = PageRequest.of(pageNum, 5);
+        PageRequest pageRequest = PageRequest.of(pageNum, 4);
         Page<Product> productInfos = productRepository.findByStatus(Status.ACTIVE, pageRequest);
 
         List<com.autto.queryservice.product.dto.Product> products = new ArrayList<>();
